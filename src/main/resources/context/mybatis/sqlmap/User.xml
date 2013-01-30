@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.focustech.demo.dao.IUserDao">
+	<select id="getUsers" parameterType="User" resultType="com.focustech.demo.po.User">
+		select * from BizUser where 1=1
+		<if test="userName != null">
+			and userName like CONCAT(CONCAT('%', #{userName}),'%')
+		</if>
+	</select>
+	<select id="getUser" resultType="com.focustech.demo.po.User">
+		select * from BizUser where userId=#{userId}
+	</select>
+	<insert id="insert" parameterType="com.focustech.demo.po.User">
+		<selectKey keyProperty="userId" resultType="java.lang.Integer" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into BizUser(userName,age) values(#{userName},#{age})
+	</insert>
+	<update id="update" parameterType="com.focustech.demo.po.User">
+		update Bizuser set userName=#{userName},age=#{age} where userId=#{userId}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from Bizuser where userId=#{userId}
+	</delete>
+</mapper>
