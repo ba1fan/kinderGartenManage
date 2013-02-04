@@ -14,7 +14,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
 	<mvc:default-servlet-handler/>
     <mvc:resources mapping="/resources/**" location="/resources/" />
     <bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
-        <property name="resourceLoaderPath" value="/WEB-INF/vm"/>
+        <property name="resourceLoaderPath" value="/WEB-INF/vm/pages"/>
         <property name="configLocation" value="classpath:/context/velocity/velocity.properties"/>
         <property name="velocityProperties">
             <props>

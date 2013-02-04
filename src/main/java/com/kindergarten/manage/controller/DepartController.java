@@ -1,6 +1,9 @@
 package com.kindergarten.manage.controller;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +24,27 @@ public class DepartController {
 	public String index(Model model) {
 		List<Depart> departs = departService.getDeparts();
 		model.addAttribute("departs", departs);
-		return "/pages/depart";
+		return "/depart/show";
 	}
 
+	@RequestMapping(value = "/show", method = RequestMethod.POST)
+	public void show(Model model, HttpServletResponse response) throws IOException {
+		List<Depart> departs = departService.getDeparts();
+		StringBuilder sb = new StringBuilder();
+		sb.append("{ Rows: [");
+		if (departs.size() > 0) {
+			for (Depart depart : departs) {
+				sb.append("{\"departId\": \"").append(depart.getDepartId()).append("\",");
+				sb.append("\"departName\": \"").append(depart.getDepartName()).append("\",");
+				sb.append("\"status\": \"").append(depart.getStatus()).append("\"},");
+			}
+			sb.substring(0, sb.length());
+			// sb.Remove(sb.length() - 1, 1);
+		}
+		sb.append("], Total: ").append(departs.size()).append(" }");
+		// model.addAttribute("departs", departs);
+		response.setContentType("text/html;charset=UTF-8");
+		response.getWriter().write(sb.toString());
+
+	}
 }
