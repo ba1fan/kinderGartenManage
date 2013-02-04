@@ -13,8 +13,7 @@ public class DepartService {
 	@Autowired
 	private IDepartDAO departDAO;
 
-	public List<Depart> getDeparts() {
-		Depart args = new Depart();
+	public List<Depart> getDeparts(Depart args) {
 		return departDAO.getDeparts(args);
 	}
 }

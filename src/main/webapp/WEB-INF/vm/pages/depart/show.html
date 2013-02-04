@@ -7,15 +7,14 @@
 <script>
 $(function(){
 	var grid;
-	grid = $("#maingrid4").ligerGrid({
+	grid = $("#maingrid").ligerGrid({
 	    columns: [
-	  { display: 'ID', name: 'departId', minWidth: 110 },
 	  { display: '角色', name: 'departName', minWidth: 110 },
 	  { display: '状态', name: 'status', minWidth: 110 },
 	  { display: '操作', isSort: false, width: 120, render: function (rowdata, rowindex, value) {
 	      var h = "";
-	      h += "<a href='javascript:edit(" + rowdata.departId + ")'>修改</a> ";
-	      h += "<a href='javascript:deleteRow(" + rowdata.departId + ")'>删除</a> ";
+	      h += "<a href='/depart/" + rowdata.departId + "/edit'>修改</a> ";
+	      h += "<a href='/depart/" + rowdata.departId + "/delete'>删除</a> ";
 	      return h;
 	  }
 	  }
@@ -23,9 +22,25 @@ $(function(){
 	url: '/depart/show', width: '60%', height: '60%'
 	});	
 });
-
+function js_reloadGrid()
+{
+	   $("#maingrid").ligerGetGridManager().setOptions({
+           parms: [{ name: "departName", value: $('#departName').val().trim()}]
+       });
+       $("#maingrid").ligerGetGridManager().loadData();
+}
 </script>
+ <div>
+  <table>
+   <tr id="search2">
+         <td style="font-size: small;" >角色名称：<input id="departName" type="text"  name="departName" />
+          <a  href="javascript:js_reloadGrid();">检索</a>      
+          <a  id="linkAdd" href="/depart/add">新增</a> 
+         </td>
+      </tr>
+    </table>
+  </div>
 <form>
-  <div id="maingrid4" style="margin: 0; padding: 0">
+  <div id="maingrid" style="margin: 0; padding: 0">
   </div>
 </form>

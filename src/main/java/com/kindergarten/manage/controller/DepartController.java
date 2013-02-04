@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -21,22 +20,20 @@ public class DepartController {
 	private DepartService departService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String index(Model model) {
-		List<Depart> departs = departService.getDeparts();
-		model.addAttribute("departs", departs);
-		return "/depart/show";
+	public String index() {
+		return "/pages/depart/show";
 	}
 
 	@RequestMapping(value = "/show", method = RequestMethod.POST)
-	public void show(Model model, HttpServletResponse response) throws IOException {
-		List<Depart> departs = departService.getDeparts();
+	public void show(Depart de, HttpServletResponse response) throws IOException {
+		List<Depart> departs = departService.getDeparts(de);
 		StringBuilder sb = new StringBuilder();
 		sb.append("{ Rows: [");
 		if (departs.size() > 0) {
 			for (Depart depart : departs) {
 				sb.append("{\"departId\": \"").append(depart.getDepartId()).append("\",");
 				sb.append("\"departName\": \"").append(depart.getDepartName()).append("\",");
-				sb.append("\"status\": \"").append(depart.getStatus()).append("\"},");
+				sb.append("\"status\": \"").append(depart.getStatus() == 1 ? "Õý³£" : "½ûÓÃ").append("\"},");
 			}
 			sb.substring(0, sb.length());
 			// sb.Remove(sb.length() - 1, 1);

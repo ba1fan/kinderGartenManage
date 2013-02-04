@@ -4,5 +4,8 @@
 <mapper namespace="com.kindergarten.manage.dao.IDepartDAO">
 	<select id="getDeparts" parameterType="Depart" resultType="com.kindergarten.manage.po.Depart">
 		select * from depart where 1=1
+		<if test="departName != null">
+			and departName like CONCAT(CONCAT('%', #{departName}),'%')
+		</if>
 	</select>
 </mapper>
