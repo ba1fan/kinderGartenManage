@@ -1,0 +1,28 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<form action="/depart/add" method="post">
+<table style="font-size: small;">
+	<tr>
+		<td >角色名称：
+		</td>
+		<td>
+			<input type="hidden" name="departId"  value="$!depart.departId"/>
+			<input type="text" name="departName" value="$!depart.departName"/>
+		</td>
+	</tr>
+	<tr>
+		<td >状态：
+		</td>
+		<td>
+			<select name="status">
+				<option #if($!depart.status=='1') selected="selected" #end value="1">正常</option>
+				<option #if($!depart.status=='0') selected="selected" #end value="0">禁用</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" >
+			<input type="submit" value="确定"/>
+		</td>
+	</tr>
+</table>
+</form>

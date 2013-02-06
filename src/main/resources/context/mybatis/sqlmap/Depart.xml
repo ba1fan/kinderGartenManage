@@ -8,4 +8,20 @@
 			and departName like CONCAT(CONCAT('%', #{departName}),'%')
 		</if>
 	</select>
+	<select id="getDepart" resultType="com.kindergarten.manage.po.Depart">
+		select * from depart where departId=#{departId}
+	</select>
+	<insert id="insert" parameterType="com.kindergarten.manage.po.Depart">
+		<selectKey keyProperty="departId" resultType="java.lang.Integer" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into depart (departName,status) values(#{departName},#{status})
+	</insert>
+	<update id="update" parameterType="com.kindergarten.manage.po.Depart">
+		update depart set departName=#{departName},status=#{status} where departId=#{departId}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from depart where departId=#{departId}
+	</delete>
 </mapper>
