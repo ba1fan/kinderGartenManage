@@ -1,0 +1,60 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script>
+function goback()
+{
+	history.back();
+}
+</script>
+<form action="/user/add" method="post">
+<table style="font-size: small;">
+	<tr>
+		<td >用户名：
+		</td>
+		<td>
+			<input type="hidden" name="userId"  value="$!user.userId"/>
+			<input type="text" name="departName" value="$!user.userName"/>
+		</td>
+	</tr>
+	<tr>
+		<td >密码：
+		</td>
+		<td>
+			<input type="text" name="password" value="$!user.password"/>
+		</td>
+	</tr>
+	<tr>
+		<td >角色：
+		</td>
+		<td>
+			<select name="departId">
+				#foreach( $depart in $departs)
+					<option
+						#if($!user.userId==$!depart.departId)
+							selected="selected"
+						#end
+						value="$!depart.departId"
+					>$!depart.departName</option>
+				#end
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td >状态：
+		</td>
+		<td>
+			<select name="status">
+				<option #if($!user.status=='1') selected="selected" #end value="1">正常</option>
+				<option #if($!user.status=='0') selected="selected" #end value="0">禁用</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td >
+			<input type="submit" value="确定"/>
+		</td>
+		<td>
+			<input type="button" value="返回" onclick="goback();"/>
+		</td>
+	</tr>
+</table>
+</form>

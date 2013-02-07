@@ -7,11 +7,23 @@ import org.springframework.stereotype.Service;
 
 import com.kindergarten.manage.dao.IDepartDAO;
 import com.kindergarten.manage.po.Depart;
+import com.kindergarten.manage.util.Constants;
 
 @Service
 public class DepartService {
 	@Autowired
 	private IDepartDAO departDAO;
+
+	/**
+	 * 查询所有没有禁用的用户
+	 * 
+	 * @return
+	 */
+	public List<Depart> getLists() {
+		Depart args = new Depart();
+		args.setStatus(Constants.NORMAL_STATUS);
+		return departDAO.getDeparts(args);
+	}
 
 	/**
 	 * 根据搜索条件来获取角色的列表
@@ -64,6 +76,8 @@ public class DepartService {
 	 * @param departId
 	 */
 	public void delete(int departId) {
-		departDAO.delete(departId);
+		Depart depart = departDAO.getDepart(departId);
+		depart.setStatus(Constants.DELETE_STATUS);
+		departDAO.update(depart);
 	}
 }
