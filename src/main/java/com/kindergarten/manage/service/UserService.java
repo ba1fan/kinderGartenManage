@@ -14,6 +14,16 @@ public class UserService {
 	private IUserDAO userDAO;
 
 	/**
+	 * 获取所有用户
+	 * 
+	 * @return
+	 */
+	public List<User> getLists() {
+		User args = new User();
+		return userDAO.getUsers(args);
+	}
+
+	/**
 	 * 根据搜索条件来获取用户的列表
 	 * 
 	 * @param args

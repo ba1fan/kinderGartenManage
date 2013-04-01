@@ -6,4 +6,11 @@ public class Constants {
 	 */
 	public static int DELETE_STATUS = 0;
 	public static int NORMAL_STATUS = 1;
+	/**
+	 * ΩÃ ¶log±ÌlogType
+	 */
+	public static int LOG_TYPE_DEPART = 0;
+	public static int LOG_TYPE_EDUCATE = 1;
+	public static int LOG_TYPE_TITLE = 2;
+
 }

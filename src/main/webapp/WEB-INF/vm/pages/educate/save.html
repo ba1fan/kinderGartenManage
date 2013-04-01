@@ -1,0 +1,27 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script>
+function goback()
+{
+	history.back();
+}
+</script>
+<form action="/educate/add" method="post">
+<table style="font-size: small;">
+	<tr>
+		<td >学历名称：
+		</td>
+		<td>
+			<input type="hidden" name="educateId"  value="$!educate.educateId"/>
+			<input type="text" name="educateName" value="$!educate.educateName"/>
+		</td>
+	</tr>
+	<tr>
+		<td >
+			<input type="submit" value="确定"/>
+		</td>
+		<td>
+			<input type="button" value="返回" onclick="goback();"/>
+		</td>
+	</tr>
+</table>
+</form>

@@ -35,3 +35,48 @@ CREATE  TABLE  `Depart`
   `status` int(2) NOT NULL,
   PRIMARY KEY (`departId`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE  TABLE  `Educate`
+(
+  `educateId` int(10) NOT NULL AUTO_INCREMENT,
+  `educateName` varchar(20) NOT NULL,
+  PRIMARY KEY (`educateId`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE  TABLE  `TechTitle`
+(
+  `titleId` int(10) NOT NULL AUTO_INCREMENT,
+  `titleName` varchar(20) NOT NULL,
+  PRIMARY KEY (`titleId`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE  TABLE  `TeacherInfo`
+(
+  `teacherId` int(10) NOT NULL AUTO_INCREMENT,
+  `teacherName` varchar(20) NOT NULL,
+  `sex` int(1) NULL,
+  `age` int(3) NULL,
+  `educateId` int(10) NOT NULL,
+  `titleId` int(10) NOT NULL,
+  `departId` int(10) NOT NULL,
+  `userId` int(10) NOT NULL,
+  `subject` varchar(20) NULL,
+  `tel` varchar(20) NULL,
+  `educateSchool` varchar(20) NULL,
+  `addTime` datetime NULL,
+  `salary` varchar(20) NULL,
+  PRIMARY KEY (`teacherId`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE  TABLE  `TeacherLog`
+(
+  `logId` int(10) NOT NULL AUTO_INCREMENT,
+  `logType` int(1) NOT NULL,
+  `resFromId` int(10) NOT NULL,
+  `resToId` int(10) NOT NULL,
+  `teacherId` int(10) NOT NULL,
+  `addTime` datetime NULL,
+  PRIMARY KEY (`logId`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+

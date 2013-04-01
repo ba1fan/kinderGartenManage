@@ -46,7 +46,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
     <!--spring mvc-->
     <servlet>
-        <servlet-name>Manager</servlet-name>
+        <servlet-name>Manage</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
@@ -55,7 +55,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>Manager</servlet-name>
+        <servlet-name>Manage</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 

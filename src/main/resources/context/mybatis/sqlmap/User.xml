@@ -5,7 +5,7 @@
 	<select id="getUsers" parameterType="User" resultType="com.kindergarten.manage.po.User">
 		select u.*,d.departName from user u,depart d where u.departId=d.departId  
 		<if test="userName != null">
-			and u.userName like CONCAT(CONCAT('%', #{userName}),'%')
+			and u.username like CONCAT(CONCAT('%', #{userName}),'%')
 		</if>
 	</select>
 	<select id="getUser" resultType="com.kindergarten.manage.po.User">
@@ -15,10 +15,10 @@
 		<selectKey keyProperty="userId" resultType="java.lang.Integer" order="AFTER">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
-		insert into user (userName,password,status,departId) values(#{userName},#{password}#,#{status},#{departId}#)
+		insert into user (username,password,status,departId) values(#{userName},#{password},#{status},#{departId})
 	</insert>
 	<update id="update" parameterType="com.kindergarten.manage.po.User">
-		update user set userName=#{userName},status=#{status},departId=#{departId},password=#{password} where userId=#{userId}
+		update user set username=#{userName},status=#{status},departId=#{departId},password=#{password} where userId=#{userId}
 	</update>
 
 	<delete id="delete" parameterType="java.lang.Integer">

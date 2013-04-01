@@ -1,0 +1,54 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script>
+	function goback() {
+		history.back();
+	}
+</script>
+
+<form>
+	
+	<fieldset style="width: 60%">
+		<legend>部门调动记录</legend>
+		<table >
+			#foreach( $depart in $departLog)
+			<tr style="height: 40px">
+				<td>
+				时间：$!depart.addTime
+				，从<font color="red">$!depart.fromDepartName</font>调到
+				<font color="red">$!depart.toDepartName</font>
+				</td>
+			</tr>
+			#end
+			
+		</table>
+	</fieldset>
+	<fieldset style="width: 60%">
+		<legend>学历变更记录</legend>
+		<table >
+			#foreach( $educate in $educateLog)
+			<tr style="height: 40px">
+				<td>
+				时间：$!educate.addTime
+				，从<font color="red">$!educate.fromEducateName</font>调到
+				<font color="red">$!educate.toEducateName</font>
+				</td>
+			</tr>
+			#end
+		</table>
+	</fieldset>
+	<fieldset style="width: 60%">
+		<legend>职称变更记录</legend>
+		<table >
+			#foreach( $title in $titleLog)
+			<tr style="height: 40px">
+				<td>
+				时间：$!title.addTime
+				，从<font color="red">$!title.fromTitleName</font>调到
+				<font color="red">$!title.toTitleName</font>
+				</td>
+			</tr>
+			#end
+		</table>
+	</fieldset>
+</form>
+<input type="button" value="返回" onclick="goback();"/>

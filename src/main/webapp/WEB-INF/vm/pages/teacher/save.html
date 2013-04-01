@@ -1,0 +1,110 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script>
+	function goback() {
+		history.back();
+	}
+</script>
+<form action="/teacher/add" method="post">
+	<fieldset class="setBasic" style="width: 60%">
+		<legend>基本信息</legend>
+		<table cellpadding="0" cellspacing="0" width="100%">
+			<tr style="height: 40px">
+				<td class="tdTitle"><input id="teacherId" name="teacherId" value="$!info.teacherId" type="hidden" /> 
+					姓名：<input type="text" id="teacherName" name="teacherName" value="$!info.teacherName" />
+				</td>
+				<td>
+					性别：<select  name="sex">
+							<option value="0" #if($!info.sex==0) selected="selected" #end>男</option>
+							<option value="1" #if($!info.sex==1) selected="selected" #end>女</option>
+						 </select>
+				</td>
+			</tr>
+			<tr style="height: 40px">
+				<td class="tdTitle">
+					年龄：<input type="text" id="age" name="age" value="$!info.age" />
+				</td>
+				<td>
+					联系电话：<input type="text" id="tel" name="tel" value="$!info.tel" />
+				</td>
+			</tr>
+			</tr>
+			<tr style="height: 40px">
+				<td class="tdTitle">
+					毕业学校：<input type="text" id="educateSchool" name="educateSchool" value="$!info.educateSchool" />
+				</td>
+				<td>
+					所教科目：<input type="text" id="subject" name="subject" value="$!info.subject" />
+				</td>
+			</tr>
+			</tr>
+		</table>
+	</fieldset>
+	<fieldset class="setConnect" style="width: 60%">
+		<legend>学校信息</legend>
+		<table border="0" cellspacing="0" cellpadding="0" width="100%">
+			<tr style="height: 40px">
+				<td class="tdTitle">
+					所属部门：
+					<select name="departId">
+						#foreach( $depart in $departs)
+							<option
+								#if($!info.departId==$!depart.departId)
+									selected="selected"
+								#end
+								value="$!depart.departId"
+							>$!depart.departName</option>
+						#end
+					</select>
+				</td>
+				<td>
+					学历：
+					<select name="educateId">
+						#foreach( $educate in $educates)
+							<option
+								#if($!info.educateId==$!educate.educateId)
+									selected="selected"
+								#end
+								value="$!educate.educateId"
+							>$!educate.educateName</option>
+						#end
+					</select>
+				</td>
+			</tr>
+			<tr style="height: 40px">
+				<td class="tdTitle">
+					技术职称：
+					<select name="titleId">
+						#foreach( $title in $titles)
+							<option
+								#if($!info.titleId==$!title.titleId)
+									selected="selected"
+								#end
+								value="$!title.titleId"
+							>$!title.titleName</option>
+						#end
+					</select>
+				</td>
+				<td>
+					对应帐号：
+					<select name="userId">
+						#foreach( $user in $users)
+							<option
+								#if($!info.userId==$!user.userId)
+									selected="selected"
+								#end
+								value="$!user.userId"
+							>$!user.userName</option>
+						#end
+					</select>
+				</td>
+			</tr>
+			<tr style="height: 40px">
+				<td class="tdTitle">
+					薪水：<input type="text" id="salary" name="salary" value="$!info.salary" />
+				</td>
+			</tr>
+		</table>
+	</fieldset>
+	<input type="submit" value="确定"/> 
+	<input type="button" value="返回" onclick="goback();"/>
+</form>

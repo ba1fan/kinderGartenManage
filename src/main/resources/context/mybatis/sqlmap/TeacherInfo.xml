@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kindergarten.manage.dao.ITeacherInfoDAO">
+	<select id="getTeacherInfos" parameterType="TeacherInfo" resultType="com.kindergarten.manage.po.TeacherInfo">
+		select * from TeacherInfo where 1=1
+		<if test="teacherName != null">
+			and teacherName like CONCAT(CONCAT('%', #{teacherName}),'%')
+		</if>
+	</select>
+	<select id="getTeacherInfo" resultType="com.kindergarten.manage.po.TeacherInfo">
+		select * from teacherInfo where teacherId=#{teacherId}
+	</select>
+	<insert id="insert" parameterType="com.kindergarten.manage.po.TeacherInfo">
+		<selectKey keyProperty="teacherId" resultType="java.lang.Integer" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into TeacherInfo 
+		(teacherName,sex,age,educateId,titleId,departId,userId,subject,tel,educateSchool,salary,addTime) 
+		values(#{teacherName},#{sex},#{age},#{educateId},#{titleId},#{departId},#{userId},#{subject},#{tel},#{educateSchool},#{salary},now())
+	</insert>
+	<update id="update" parameterType="com.kindergarten.manage.po.TeacherInfo">
+		update TeacherInfo set teacherName=#{teacherName},
+		sex=#{sex},
+		age=#{age},
+		educateId=#{educateId},
+		titleId=#{titleId},
+		departId=#{departId},
+		userId=#{userId},
+		subject=#{subject},
+		tel=#{tel},
+		educateSchool=#{educateSchool},
+		salary=#{salary}
+		 where teacherId=#{teacherId}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from teacherInfo where teacherId=#{teacherId}
+	</delete>
+</mapper>

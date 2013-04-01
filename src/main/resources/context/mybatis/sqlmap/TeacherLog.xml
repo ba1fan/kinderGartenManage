@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kindergarten.manage.dao.ITeacherLogDAO">
+	<select id="getTeacherLogs" parameterType="TeacherLog" resultType="com.kindergarten.manage.po.TeacherLog">
+		select * from TeacherLog where logType=#{logType}
+	</select>
+	<insert id="insert" parameterType="com.kindergarten.manage.po.TeacherLog">
+		<selectKey keyProperty="logId" resultType="java.lang.Integer" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into TeacherLog (logType,resFromId,resToId,teacherId,addTime) values(#{logType},#{resFromId},#{resToId},#{teacherId},now())
+	</insert>
+	<select id="getTeacherDepartLogs"  parameterType="TeacherLog" resultType="com.kindergarten.manage.po.TeacherLog">
+		select l.addTime
+		,f.departName as fromDepartName
+		,t.departName as toDepartName 
+		from TeacherLog l,depart f,depart t 
+		where l.resFromId=f.departId 
+		and l.resToId=t.departId 
+		and l.logType=#{logType}
+		and l.teacherId=#{teacherId}
+	</select>
+	<select id="getTeacherEducateLogs"  parameterType="TeacherLog" resultType="com.kindergarten.manage.po.TeacherLog">
+		select l.addTime
+		,f.educateName as fromEducateName
+		,t.educateName as toEducateName 
+		from TeacherLog l,educate f,educate t 
+		where l.resFromId=f.educateId 
+		and l.resToId=t.educateId 
+		and l.logType=#{logType}
+		and l.teacherId=#{teacherId}
+	</select>
+	<select id="getTeacherTitleLogs"  parameterType="TeacherLog" resultType="com.kindergarten.manage.po.TeacherLog">
+		select l.addTime
+		,f.titleName as fromTitleName
+		,t.titleName as toTitleName 
+		from TeacherLog l,techtitle f,techtitle t 
+		where l.resFromId=f.titleId 
+		and l.resToId=t.titleId 
+		and l.logType=#{logType}
+		and l.teacherId=#{teacherId}
+	</select>
+</mapper>

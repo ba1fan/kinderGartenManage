@@ -1,0 +1,27 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script>
+function goback()
+{
+	history.back();
+}
+</script>
+<form action="/title/add" method="post">
+<table style="font-size: small;">
+	<tr>
+		<td >职称名称：
+		</td>
+		<td>
+			<input type="hidden" name="titleId"  value="$!title.titleId"/>
+			<input type="text" name="titleName" value="$!title.titleName"/>
+		</td>
+	</tr>
+	<tr>
+		<td >
+			<input type="submit" value="确定"/>
+		</td>
+		<td>
+			<input type="button" value="返回" onclick="goback();"/>
+		</td>
+	</tr>
+</table>
+</form>

@@ -1,0 +1,101 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script>
+	function goback() {
+		history.back();
+	}
+     function preview() {
+       bdhtml = window.document.body.innerHTML;
+       sprnstr = "<!--startprint-->";
+       eprnstr = "<!--endprint-->";
+       prnhtml = bdhtml.substr(bdhtml.indexOf(sprnstr) + 17);
+       prnhtml = prnhtml.substring(0, prnhtml.indexOf(eprnstr));
+       window.document.body.innerHTML = prnhtml;
+       window.print();
+     }
+
+</script>
+
+<form>
+	<!--startprint-->
+	<fieldset style="width: 60%">
+		<legend>基本信息</legend>
+		<table >
+			<tr style="height: 40px">
+				<td class="tdTitle"><input id="teacherId" name="teacherId" value="$!info.teacherId" type="hidden" /> 
+					姓名：$!info.teacherName
+				</td>
+				<td>
+						性别： #if($!info.sex==0) 男 #else 女 #end
+				</td>
+			</tr>
+			<tr style="height: 40px">
+				<td class="tdTitle">
+					年龄：$!info.age
+				</td>
+				<td>
+					联系电话：$!info.tel
+				</td>
+			</tr>
+			<tr style="height: 40px">
+				<td class="tdTitle">
+					毕业学校：$!info.educateSchool
+				</td>
+				<td>
+					所教科目：$!info.subject
+				</td>
+			</tr>
+		</table>
+	</fieldset>
+	<fieldset style="width: 60%">
+		<legend>学校信息</legend>
+		<table >
+			<tr style="height: 40px">
+				<td class="tdTitle">
+					所属部门：
+						#foreach( $depart in $departs)
+								#if($!info.departId==$!depart.departId)
+									$!depart.departName
+								#end
+						#end
+				</td>
+				<td>
+					学历：
+						#foreach( $educate in $educates)
+								#if($!info.educateId==$!educate.educateId)
+									$!educate.educateName
+								#end
+						#end
+				</td>
+			</tr>
+			<tr style="height: 40px">
+				<td class="tdTitle">
+					技术职称：
+						#foreach( $title in $titles)
+								#if($!info.titleId==$!title.titleId)
+									$!title.titleName
+								#end
+						#end
+				</td>
+				<td>
+					对应帐号：
+						#foreach( $user in $users)
+								#if($!info.userId==$!user.userId)
+									$!user.userName
+								#end	
+						#end
+				</td>
+			</tr>
+			<tr style="height: 40px">
+				<td class="tdTitle">
+					薪水：$!info.salary
+				</td>
+				<td></td>
+			</tr>
+		</table>
+	</fieldset>
+	<!--endprint-->
+</form>
+	
+	
+	<input type="button" value="打印" onclick="preview();"/>
+	<input type="button" value="返回" onclick="goback();"/>
