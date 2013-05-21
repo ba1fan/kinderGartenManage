@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kindergarten.manage.dao.IAuthMapDAO">
+	<select id="getAuthMapByDepartId" resultType="com.kindergarten.manage.po.AuthMap">
+		select  * from authMap  where  departId=#{departId}
+	</select>
+	<insert id="insert" parameterType="com.kindergarten.manage.po.AuthMap">
+		<selectKey keyProperty="authMapId" resultType="java.lang.Integer" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into AuthMap (authStr,departId) values(#{authStr},#{departId})
+	</insert>
+	<update id="update" parameterType="com.kindergarten.manage.po.AuthMap">
+		update AuthMap 
+		set authStr=#{authStr}
+		where authMapId=#{authMapId}
+	</update>
+</mapper>

@@ -477,10 +477,10 @@
                 {
                     g.selectNode(this);
                 }
-                else
-                {
-                    g.cancelSelect(this);
-                }
+//                else
+//                {
+//                    g.cancelSelect(this);
+//                }
             });
         },
         getTextByID: function (id)

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kindergarten.manage.dao.IAttendanceDAO">
+	<select id="getAttendances" parameterType="Attendance" resultType="com.kindergarten.manage.po.Attendance">
+		select a.*,c.childName from Attendance a,child c  where 1=1 
+		and a.childId=c.childId 
+		<if test="year != -1">
+			and a.year= #{year}
+		</if>
+		<if test="month != -1">
+			and a.month =#{month}
+		</if>
+		<if test="childId != 0">
+			and a.childId =#{childId}
+		</if>
+	</select>
+	<select id="getAttendance" resultType="com.kindergarten.manage.po.Attendance">
+		select a.*,c.childName from Attendance a,child c  where  a.childId=c.childId and attendId=#{attendId}
+	</select>
+	<insert id="insert" parameterType="com.kindergarten.manage.po.Attendance">
+		<selectKey keyProperty="attendId" resultType="java.lang.Integer" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into Attendance (year,month,count,childId) values(#{year},#{month},#{count},#{childId})
+	</insert>
+	<update id="update" parameterType="com.kindergarten.manage.po.Attendance">
+		update Attendance set count=#{count},year=#{year},month=#{month} where attendId=#{attendId}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from Attendance where attendId=#{attendId}
+	</delete>
+</mapper>

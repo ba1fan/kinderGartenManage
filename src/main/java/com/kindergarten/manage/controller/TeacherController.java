@@ -128,6 +128,18 @@ public class TeacherController {
 	}
 
 	/**
+	 * 删除操作
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	@RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
+	public String delete(@PathVariable int id) {
+		teacherService.delete(id);
+		return "/pages/teacher/show";
+	}
+
+	/**
 	 * 初始化页面元素
 	 * 
 	 * @param model

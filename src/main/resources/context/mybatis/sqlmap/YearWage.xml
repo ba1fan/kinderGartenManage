@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kindergarten.manage.dao.IYearWageDAO">
+	<select id="getYearWages" parameterType="YearWage" resultType="com.kindergarten.manage.po.YearWage">
+		select m.*,c.childName from YearWage m,child  c where m.childId=c.childId
+
+		<if test="year != 0">
+			and m.year = #{year}
+		</if>
+		<if test="term != 0">
+			and m.term = #{term}
+		</if>
+	</select>
+
+
+	<insert id="insert" parameterType="com.kindergarten.manage.po.YearWage">
+		<selectKey keyProperty="yearWageId" resultType="java.lang.Integer" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into YearWage 
+		(year
+		,term
+		,childId
+		,applyWages
+		,airWages
+		,airCollWages
+		,borrowWages
+		,quiltWages
+		,manageWages
+		,careWages
+		,otherWages
+		,authorize
+		,overstaffs
+		,cookWages
+		,totalWages
+		,payWages
+		,addTime) 
+		values(
+		#{year}
+		,#{term}
+		,#{childId}
+		,#{applyWages}
+		,#{airWages}
+		,#{airCollWages}
+		,#{borrowWages}
+		,#{quiltWages}
+		,#{manageWages}
+		,#{careWages}
+		,#{otherWages}
+		,#{authorize}
+		,#{overstaffs}
+		,#{cookWages}
+		,#{totalWages}
+		,#{payWages}
+		,now())
+	</insert>
+	
+	<update id="update" parameterType="com.kindergarten.manage.po.YearWage">
+		update YearWage set 
+		year=#{year}
+		,term=#{term}
+		,childId=#{childId}
+		,applyWages=#{applyWages}
+		,airWages=#{airWages}
+		,airCollWages=#{airCollWages}
+		,borrowWages=#{borrowWages}
+		,quiltWages=#{quiltWages}
+		,manageWages=#{manageWages}
+		,careWages=#{careWages}
+		,otherWages=#{otherWages}
+		,authorize=#{authorize}
+		,overstaffs=#{overstaffs}
+		,cookWages=#{cookWages}
+		,totalWages=#{totalWages}
+		,payWages=#{payWages}
+		where yearWageId=#{yearWageId}
+	</update>
+</mapper>

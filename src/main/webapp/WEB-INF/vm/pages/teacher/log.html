@@ -13,6 +13,7 @@
 			#foreach( $depart in $departLog)
 			<tr style="height: 40px">
 				<td>
+				$!date.formate("yyyy-MM-dd HH:mm:ss",$!depart.addTime)
 				时间：$!depart.addTime
 				，从<font color="red">$!depart.fromDepartName</font>调到
 				<font color="red">$!depart.toDepartName</font>

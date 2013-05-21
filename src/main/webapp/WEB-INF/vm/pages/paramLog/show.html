@@ -1,0 +1,45 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="/lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
+<script src="/lib/jquery/jquery-1.3.2.min.js" type="text/javascript"></script>
+<script src="/lib/ligerUI/js/core/base.js" type="text/javascript"></script>
+<script src="/lib/ligerUI/js/plugins/ligerGrid.js" type="text/javascript"></script>
+<script src="/lib/ligerUI/js/plugins/ligerResizable.js" type="text/javascript"></script>
+<script>
+$(function(){
+	var grid;
+	grid = $("#maingrid").ligerGrid({
+	    columns: [
+	  { display: '姓名', name: 'childName', minWidth: 110 },
+	  { display: '性别', name: 'sex', minWidth: 110 },
+	  { display: '体检时间', name: 'year', minWidth: 110 },
+	  { display: '学期', name: 'term', minWidth: 110 },
+	  { display: '身高', name: 'height', minWidth: 110 },
+	  { display: '身高体检成绩', name: 'heightPoint', minWidth: 110 },
+	  { display: '体重', name: 'weight', minWidth: 110 },
+	  { display: '体重体检成绩', name: 'weightPoint', minWidth: 110 }
+	  ], dataAction: 'server', pageSize: 30,
+	url: '/paramLog/show', width: '80%', height: '90%'
+	});	
+});
+function js_reloadGrid()
+{
+	   $("#maingrid").ligerGetGridManager().setOptions({
+           parms: [{ name: "year", value: $('#year').val().trim()}]
+       });
+       $("#maingrid").ligerGetGridManager().loadData();
+}
+</script>
+ <div>
+  <table>
+   <tr>
+         <td style="font-size: small;" >年：<input id="year" type="text"  name="year" />
+          <a  href="javascript:js_reloadGrid();">检索</a>      
+          <a  id="linkAdd" href="/paramLog/add">新增</a> 
+         </td>
+      </tr>
+    </table>
+  </div>
+<form>
+  <div id="maingrid" style="margin: 0; padding: 0">
+  </div>
+</form>

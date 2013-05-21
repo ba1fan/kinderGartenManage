@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kindergarten.manage.dao.IClazzDAO">
+	<select id="getClazzs" parameterType="Clazz" resultType="com.kindergarten.manage.po.Clazz">
+		select * from clazz where 1=1
+		<if test="clazzName != null">
+			and clazzName like CONCAT(CONCAT('%', #{clazzName}),'%')
+		</if>
+	</select>
+	<select id="getClazz" resultType="com.kindergarten.manage.po.Clazz">
+		select * from clazz where clazzId=#{clazzId}
+	</select>
+	<insert id="insert" parameterType="com.kindergarten.manage.po.Clazz">
+		<selectKey keyProperty="clazzId" resultType="java.lang.Integer" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into clazz (clazzName) values(#{clazzName})
+	</insert>
+	<update id="update" parameterType="com.kindergarten.manage.po.Clazz">
+		update Clazz set clazzName=#{clazzName} where clazzId=#{clazzId}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from Clazz where clazzId=#{clazzId}
+	</delete>
+</mapper>

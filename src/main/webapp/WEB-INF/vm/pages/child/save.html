@@ -1,0 +1,119 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="/lib/ligerUI/skins/Aqua/css/ligerui-form.css" rel="stylesheet" type="text/css" />  
+<script src="/lib/jquery/jquery-1.3.2.min.js" type="text/javascript"></script>
+<script src="/lib/ligerUI/js/core/base.js" type="text/javascript"></script>
+<script src="/lib/ligerUI/js/plugins/ligerDateEditor.js" type="text/javascript"></script>
+<script>
+	function goback() {
+		history.back();
+	}
+	$(function(){
+		$("#entrandayStr").ligerDateEditor({  labelWidth: 100, labelAlign: 'center' });
+		$("#birthdayStr").ligerDateEditor({ labelWidth: 100, labelAlign: 'center' });
+	});
+</script>
+
+<form action="/child/add" method="post">
+	<fieldset class="setBasic" style="width: 60%">
+		<legend>基本信息</legend>
+		<table style="width: 60%" class="l-table-edit">
+			<tr style="height: 40px">
+				<td class="tdTitle"><input id="childId" name="childId" value="$!child.childId" type="hidden" /> 
+					姓名：<input type="text" id="childName" name="childName" value="$!child.childName" />
+				</td>
+				<td>
+					性别：<select  name="sex">
+							<option value="0" #if($!child.sex==0) selected="selected" #end>男</option>
+							<option value="1" #if($!child.sex==1) selected="selected" #end>女</option>
+						 </select>
+				</td>
+			</tr>
+			<tr style="height: 40px">
+				<td class="tdTitle">
+					出生时间：<input type="text" id="birthdayStr" name="birthdayStr" value="$!child.birthdayStr" />
+				</td>
+				<td>
+					班级：
+					<select name="clazzId">
+						#foreach( $clazz in $clazzs)
+							<option
+								#if($!child.clazzId==$!clazz.clazzId)
+									selected="selected"
+								#end
+								value="$!clazz.clazzId"
+							>$!clazz.clazzName</option>
+						#end
+					</select>
+				</td>
+			</tr>
+			<tr style="height: 40px">
+				<td class="tdTitle">
+					入学时间：<input type="text" id=entrandayStr name="entrandayStr" value="$!child.entrandayStr" />
+				</td>
+				<td>
+					
+				</td>
+			</tr>
+		</table>
+	</fieldset>
+	<fieldset class="setConnect" style="width: 60%">
+		<legend>家庭信息</legend>
+		<table border="0" cellspacing="0" cellpadding="0" width="100%">
+			<tr style="height: 40px">
+				<td class="tdTitle">
+					父亲姓名：<input type="text" id="fatherName" name="fatherName" value="$!child.fatherName" />
+				</td>
+				<td>
+					年龄：<input type="text" id="fatherAge" name="fatherAge" value="$!child.fatherAge" />
+				</td>
+				<td>
+					工作信息：<input type="text" id="fatherOcu" name="fatherOcu" value="$!child.fatherOcu" />
+				</td>
+			</tr>
+			<tr style="height: 40px">
+				<td class="tdTitle">
+					母亲姓名：<input type="text" id="motherName" name="motherName" value="$!child.motherName" />
+				</td>
+				<td>
+					年龄：<input type="text" id="motherAge" name="motherAge" value="$!child.motherAge" />
+				</td>
+				<td>
+					工作信息：<input type="text" id="motherOcu" name="motherOcu" value="$!child.motherOcu" />
+				</td>
+			</tr>
+			<tr style="height: 40px">
+				<td class="tdTitle">
+					家庭地址：<input type="text" id="address" name="address" value="$!child.address" />
+				</td>
+				<td class="tdTitle">
+					联系电话：<input type="text" id="tel" name="tel" value="$!child.tel" />
+				</td>
+				<td class="tdTitle">
+					
+				</td>
+			</tr>
+			<tr style="height: 40px">
+				<td class="tdTitle">
+					父母是否为员工：
+				</td>
+				<td>
+					<input type="radio" name="isTeahcher" value="0"> 都不是  
+					<input type="radio" name="isTeahcher" value="1"> 父亲
+					<input type="radio" name="isTeahcher" value="2"> 母亲
+					<input type="radio" name="isTeahcher" value="3"> 都是
+				</td>
+			</tr>
+			<tr>
+				<td class="tdTitle">
+					祖父母是否为员工：
+				</td>
+				<td>
+					<input type="radio" name="isGrandTeahcher" value="0"> 是  
+					<input type="radio" name="isGrandTeahcher" value="1"> 不是
+				</td>
+			</tr>
+		</table>
+	</fieldset>
+	<input type="submit" value="确定"/> 
+	<input type="button" value="返回" onclick="goback();"/>
+</form>

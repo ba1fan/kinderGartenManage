@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kindergarten.manage.dao.IMonthWageDAO">
+	<select id="getMonthWages" parameterType="MonthWage" resultType="com.kindergarten.manage.po.MonthWage">
+		select m.*,c.childName from MonthWage m,child  c where m.childId=c.childId
+
+		<if test="month != 0">
+			and month = #{month}
+		</if>
+		<if test="year != 0">
+			and year = #{year}
+		</if>
+	</select>
+
+
+	<insert id="insert" parameterType="com.kindergarten.manage.po.MonthWage">
+		<selectKey keyProperty="monthWageId" resultType="java.lang.Integer" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into MonthWage 
+		(year
+		,month
+		,childId
+		,boardWages
+		,skillWages
+		,arrears
+		,careWages
+		,manageWages
+		,overdue
+		,other
+		,totalWages
+		,payWages
+		,addTime) 
+		values(#{year}
+		,#{month}
+		,#{childId}
+		,#{boardWages}
+		,#{skillWages}
+		,#{arrears}
+		,#{careWages}
+		,#{manageWages}
+		,#{overdue}
+		,#{other}
+		,#{totalWages}
+		,#{payWages}
+		,now())
+	</insert>
+	
+	<update id="update" parameterType="com.kindergarten.manage.po.MonthWage">
+		update MonthWage set 
+		year=#{year}
+		,month=#{month}
+		,childId=#{childId}
+		,boardWages=#{boardWages}
+		,skillWages=#{skillWages}
+		,arrears=#{arrears}
+		,careWages=#{careWages}
+		,manageWages=#{manageWages}
+		,overdue=#{overdue}
+		,other=#{other}
+		,totalWages=#{totalWages}
+		,payWages=#{payWages}
+		where monthWageId=#{monthWageId}
+	</update>
+</mapper>

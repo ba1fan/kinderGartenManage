@@ -17,4 +17,6 @@ public interface IUserDAO {
 	User getUser(int userId);
 
 	void delete(int userId);
+
+	User getLoginUser(User args);
 }

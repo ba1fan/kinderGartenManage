@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kindergarten.manage.dao.IUserLogDAO">
+<!-- 	<select id="getUserLogs" parameterType="UserLog" resultType="com.kindergarten.manage.po.UserLog">
+		select u.*,d.departName from UserLog u,depart d where u.departId=d.departId  
+		<if test="UserLogName != null">
+			and u.UserLogname like CONCAT(CONCAT('%', #{UserLogName}),'%')
+		</if>
+	</select>
+	<select id="getUserLog" resultType="com.kindergarten.manage.po.UserLog">
+		select * from UserLog where UserLogId=#{UserLogId}
+	</select>
+	-->
+
+	<insert id="insert" parameterType="com.kindergarten.manage.po.UserLog">
+		<selectKey keyProperty="userLogId" resultType="java.lang.Integer" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into UserLog (userId,status,addTime) values(#{userId},#{status},now())
+	</insert>
+    <select id="getLoginErrorCount"  parameterType="java.lang.Integer" resultType="java.lang.Integer" >
+      <![CDATA[ 
+           select count(1) from UserLog 
+				where 
+				userId=#{userId} 
+				and status=0 
+				and addtime >= date_sub(now(), INTERVAL 10 MINUTE) 
+				AND addtime < now() 
+        ]]>   
+	</select> 
+	<!-- <update id="update" parameterType="com.kindergarten.manage.po.UserLog">
+		update UserLog set UserLogname=#{UserLogName},status=#{status},departId=#{departId},password=#{password} where UserLogId=#{UserLogId}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from UserLog where UserLogId=#{UserLogId}
+	</delete> -->
+</mapper>

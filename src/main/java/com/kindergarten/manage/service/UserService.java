@@ -1,17 +1,32 @@
 package com.kindergarten.manage.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kindergarten.manage.dao.IAuthDAO;
+import com.kindergarten.manage.dao.IAuthMapDAO;
 import com.kindergarten.manage.dao.IUserDAO;
+import com.kindergarten.manage.dao.IUserLogDAO;
+import com.kindergarten.manage.po.Auth;
+import com.kindergarten.manage.po.AuthMap;
 import com.kindergarten.manage.po.User;
+import com.kindergarten.manage.po.UserLog;
 
 @Service
 public class UserService {
 	@Autowired
 	private IUserDAO userDAO;
+
+	@Autowired
+	private IUserLogDAO userLogDAO;
+	@Autowired
+	private IAuthMapDAO authMapDAO;
+
+	@Autowired
+	private IAuthDAO authDAO;
 
 	/**
 	 * 获取所有用户
@@ -77,5 +92,71 @@ public class UserService {
 	 */
 	public void delete(int userId) {
 		userDAO.delete(userId);
+	}
+
+	public User getLoginUser(User user) {
+		return userDAO.getLoginUser(user);
+	}
+
+	public int getLoginErrorCount(int userId) {
+		return userLogDAO.getLoginErrorCount(userId);
+	}
+
+	public void addUserLog(UserLog log) {
+		log.setUserLogId(0);
+		userLogDAO.insert(log);
+	}
+
+	public String getAuth(int userId) {
+		User user = userDAO.getUser(userId);
+		AuthMap authMap = authMapDAO.getAuthMapByDepartId(user.getDepartId());
+		String[] str = authMap.getAuthStr().split(",");
+		List<Auth> auths = new ArrayList<Auth>();
+		for (int i = 0; i < str.length; i++) {
+			Auth auth = authDAO.getAuthByAuthMap(Integer.parseInt(str[i]));
+			auths.add(auth);
+		}
+		String rtn = "";
+		if (auths.size() > 0) {
+			String childManage = "";
+			String techManage = "";
+			String WageManage = "";
+			String manage = "";
+			String authManage = "";
+			for (Auth auth : auths) {
+				if (auth.getType() == 2) {
+					childManage += "<ul><li url=\"" + auth.getUrl() + "\"><span>" + auth.getName()
+							+ "</span></li></ul>";
+				}
+				if (auth.getType() == 3) {
+					techManage += "<ul><li url=\"" + auth.getUrl() + "\"><span>" + auth.getName() + "</span></li></ul>";
+				}
+				if (auth.getType() == 4) {
+					WageManage += "<ul><li url=\"" + auth.getUrl() + "\"><span>" + auth.getName() + "</span></li></ul>";
+				}
+				if (auth.getType() == 5) {
+					manage += "<ul><li url=\"" + auth.getUrl() + "\"><span>" + auth.getName() + "</span></li></ul>";
+				}
+				if (auth.getType() == 6) {
+					authManage += "<ul><li url=\"" + auth.getUrl() + "\"><span>" + auth.getName() + "</span></li></ul>";
+				}
+			}
+			if (!childManage.equals("")) {
+				rtn += "<li isexpand=\"false\"><span>幼儿管理</span>" + childManage + "</li>";
+			}
+			if (!techManage.equals("")) {
+				rtn += "<li isexpand=\"false\"><span>教工管理</span>" + techManage + "</li>";
+			}
+			if (!WageManage.equals("")) {
+				rtn += "<li isexpand=\"false\"><span>财务管理</span>" + WageManage + "</li>";
+			}
+			if (!manage.equals("")) {
+				rtn += "<li isexpand=\"false\"><span>数据维护</span>" + manage + "</li>";
+			}
+			if (!authManage.equals("")) {
+				rtn += "<li isexpand=\"false\"><span>系统管理</span>" + authManage + "</li>";
+			}
+		}
+		return rtn;
 	}
 }

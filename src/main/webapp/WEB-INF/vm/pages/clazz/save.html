@@ -1,0 +1,27 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script>
+function goback()
+{
+	history.back();
+}
+</script>
+<form action="/clazz/add" method="post">
+<table style="font-size: small;">
+	<tr>
+		<td >班级名称：
+		</td>
+		<td>
+			<input type="hidden" name="clazzId"  value="$!clazz.clazzId"/>
+			<input type="text" name="clazzName" value="$!clazz.clazzName"/>
+		</td>
+	</tr>
+	<tr>
+		<td >
+			<input type="submit" value="确定"/>
+		</td>
+		<td>
+			<input type="button" value="返回" onclick="goback();"/>
+		</td>
+	</tr>
+</table>
+</form>

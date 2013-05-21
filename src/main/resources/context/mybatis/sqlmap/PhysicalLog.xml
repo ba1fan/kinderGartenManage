@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kindergarten.manage.dao.IPhysicalLogDAO">
+	<select id="getPhysicalLogs" parameterType="PhysicalLog" resultType="com.kindergarten.manage.po.PhysicalLog">
+		select a.*,c.childName,c.sex from PhysicalLog a,child c  where 1=1 
+		and a.childId=c.childId 
+		<if test="year != 0">
+			and a.year= #{year}
+		</if>
+		<if test="term != 0">
+			and a.term =#{term}
+		</if>
+	</select>
+
+	<insert id="insert" parameterType="com.kindergarten.manage.po.PhysicalLog">
+		<selectKey keyProperty="logId" resultType="java.lang.Integer" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into PhysicalLog 
+		(year,term,childId,height,weight,heightPoint,weightPoint,addTime) 
+		values(#{year},#{term},#{childId},#{height},#{weight},#{heightPoint},#{weightPoint},now())
+	</insert>
+
+</mapper>

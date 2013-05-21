@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kindergarten.manage.dao.IPhyParameterDAO">
+	<select id="getPhyParameters" parameterType="PhyParameter" resultType="com.kindergarten.manage.po.PhyParameter">
+		select * from phyParameter where 1=1
+		<if test="year != -1">
+			and year= #{year}
+		</if>
+		<if test="month != -1">
+			and month= #{month}
+		</if>
+		<if test="sex != -1">
+			and sex = #{sex}
+		</if>
+		<if test="phyType != -1">
+			and phyType = #{phyType}
+		</if>
+	</select>
+</mapper>

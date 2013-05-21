@@ -1,0 +1,90 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+#if($!monthWage.error!='1')
+<legend>费用</legend>
+<table >
+	<tr style="height: 40px">
+		<td class="tdTitle">
+			伙食费:
+		</td>
+		<td>
+			$!monthWage.boardWages
+			<input id="boardWages" name="boardWages" value="$!monthWage.boardWages" type="hidden" /> 
+		</td>
+	</tr>
+	<tr style="height: 40px">
+		<td class="tdTitle">
+			艺班培训:
+		</td>
+		<td>
+			<input id="skillWages" name="skillWages" value="$!monthWage.skillWages" /> 
+		</td>
+	</tr>
+	<tr style="height: 40px">
+		<td class="tdTitle">
+			上月欠缴:
+		</td>
+		<td>
+			$!monthWage.arrears
+			<input id="arrears" name="arrears" value="$!monthWage.arrears" type="hidden" /> 
+		</td>
+	</tr>
+	<tr style="height: 40px">
+		<td class="tdTitle">
+			保育费:
+		</td>
+		<td>
+			$!monthWage.careWages
+			<input id="careWages" name="careWages" value="$!monthWage.careWages" type="hidden" /> 
+		</td>
+	</tr>
+	<tr style="height: 40px">
+		<td class="tdTitle">
+			管理费:
+		</td>
+		<td>
+			$!monthWage.manageWages
+			<input id="manageWages" name="manageWages" value="$!monthWage.manageWages" type="hidden" /> 
+		</td>
+	</tr>
+	<tr style="height: 40px">
+		<td class="tdTitle">
+			滞纳金:
+		</td>
+		<td>
+			$!monthWage.overdue
+			<input id="overdue" name="overdue" value="$!monthWage.overdue" type="hidden" /> 
+		</td>
+	</tr>
+	<tr style="height: 40px">
+		<td class="tdTitle">
+			其他费用:
+		</td>
+		<td>
+			<input id="other" name="other" value="$!monthWage.other"  /> 
+		</td>
+	</tr>
+	<tr style="height: 40px">
+		<td class="tdTitle">
+			总计：
+			<input id="totalWages" name="totalWages" value="$!monthWage.totalWages" readonly="readonly"  /> 
+			<input type="button" value="计算" onclick="calcWages();"/>
+		</td>
+		<td>
+			已交费：
+			<input id="payWages" name="payWages" value="$!monthWage.payWages"   /> 
+		</td>
+	</tr>
+	<tr style="height: 40px">
+		<td class="tdTitle">
+			<input id="monthWageId" name="monthWageId" value="0" type="hidden"/> 
+			<input type="submit" value="确定"/>
+		</td>
+		<td>
+			<input type="button" value="返回" onclick="goback();"/>
+		</td>
+	</tr>
+</table>
+#else
+	$!monthWage.msg
+#end
+	

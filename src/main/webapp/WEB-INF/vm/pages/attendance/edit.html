@@ -1,0 +1,51 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script>
+function goback()
+{
+	history.back();
+}
+</script>
+<form action="/attendance/add" method="post">
+<table style="font-size: small;">
+	<tr>
+		<td >年：
+		</td>
+		<td>
+			$!year
+		</td>
+	</tr>
+	<tr>
+		<td >月：
+		</td>
+		<td>
+			$!month
+		</td>
+	</tr>
+	<tr>
+		<td >幼儿名称：
+		</td>
+		<td>
+			$!attendance.childName
+		</td>
+	</tr>
+	<tr>
+		<td >考勤次数：
+		</td>
+		<td>
+			<input type="text" name="count" value="$!attendance.count"/>
+		</td>
+	</tr>
+	<tr>
+		<td >
+			<input id="childId" name="childId" value="$!attendance.childId" type="hidden"/>
+			<input id="month" name="month" value="$!month" type="hidden" /> 
+			<input id="year" name="year" value="$!year" type="hidden" /> 
+			<input id="attendId" name="attendId" value="$!attendance.attendId" type="hidden" /> 
+			<input type="submit" value="确定"/>
+		</td>
+		<td>
+			<input type="button" value="返回" onclick="goback();"/>
+		</td>
+	</tr>
+</table>
+</form>

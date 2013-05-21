@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kindergarten.manage.dao.IChildDAO">
+	<select id="getChilds" parameterType="Child" resultType="com.kindergarten.manage.po.Child">
+		select * from Child where 1=1
+		<if test="childName != null">
+			and childName like CONCAT(CONCAT('%', #{childName}),'%')
+		</if>
+		<if test="clazzId != 0">
+			and clazzId =#{clazzId}
+		</if>
+	</select>
+	<select id="getChild" resultType="com.kindergarten.manage.po.Child">
+		select * from child where childId=#{childId}
+	</select>
+	<insert id="insert" parameterType="com.kindergarten.manage.po.Child">
+		<selectKey keyProperty="childId" resultType="java.lang.Integer" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into Child 
+		(childName
+		,birthday
+		,entranday
+		,clazzId
+		,fatherName
+		,motherName
+		,address
+		,tel
+		,isTeahcher
+		,isGrandTeahcher
+		,fatherAge
+		,motherAge
+		,fatherOcu
+		,motherOcu
+		,sex) 
+		values
+		(#{childName}
+		,#{birthday}
+		,#{entranday}
+		,#{clazzId}
+		,#{fatherName}
+		,#{motherName}
+		,#{address}
+		,#{tel}
+		,#{isTeahcher}
+		,#{isGrandTeahcher}
+		,#{fatherAge}
+		,#{motherAge}
+		,#{fatherOcu}
+		,#{motherOcu}
+		,#{sex})
+	</insert>
+	<update id="update" parameterType="com.kindergarten.manage.po.Child">
+		update child set 
+		childName=#{childName}
+		,birthday=#{birthday}
+		,entranday=#{entranday}
+		,clazzId=#{clazzId}
+		,fatherName=#{fatherName}
+		,motherName=#{motherName}
+		,address=#{address}
+		,tel=#{tel}
+		,isTeahcher=#{isTeahcher}
+		,isGrandTeahcher=#{isGrandTeahcher}
+		,fatherAge=#{fatherAge}
+		,motherAge=#{motherAge}
+		,fatherOcu=#{fatherOcu}
+		,motherOcu=#{motherOcu}
+		,sex=#{sex}
+		where childId=#{childId}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from child where childId=#{childId}
+	</delete>
+</mapper>

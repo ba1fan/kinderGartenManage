@@ -91,4 +91,8 @@ public class TeacherService {
 		log.setLogType(Constants.LOG_TYPE_TITLE);
 		model.addAttribute("titleLog", logDAO.getTeacherTitleLogs(log));
 	}
+
+	public void delete(int teacherId) {
+		infoDAO.delete(teacherId);
+	}
 }
