@@ -1,0 +1,49 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script src="/lib/jquery/jquery-1.3.2.min.js" type="text/javascript"></script>
+<script>
+	function goback() {
+		history.back();
+	}
+</script>
+<form action="/temporary/add" method="post">
+	<table style="font-size: small;">
+		<tr>
+			<td>年：</td>
+			<td>$!temporary.year
+			<input id="month" name="month" value="$!temporary.month" type="hidden" /> 
+			<input id="year" name="year" value="$!temporary.year" type="hidden" />
+			</td>
+		</tr>
+		<tr>
+			<td>月：</td>
+			<td>$!temporary.month</td>
+		</tr>
+		<tr>
+			<td>角色：</td>
+			<td><select name="userId"> 
+				#foreach( $user in $users)
+					<option  value="$!user.userId">$!user.userName</option>
+				#end
+			</select></td>
+		</tr>
+		<tr>
+			<td>基本工资：</td>
+			<td>
+				<input id="basic" name="basic" value="$!temporary.basic" /> 
+			</td>
+		</tr>
+		<tr>
+			<td>奖金：</td>
+			<td>
+				<input id="award" name="award" value="$!temporary.award" /> 
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input id="temporaryId" name="temporaryId" value="$!temporary.temporaryId" type="hidden" /> 
+				<input type="submit" value="确定" />
+			</td>
+			<td><input type="button" value="返回" onclick="goback();" /></td>
+		</tr>
+	</table>
+</form>

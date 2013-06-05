@@ -11,6 +11,9 @@
 	<select id="getUser" resultType="com.kindergarten.manage.po.User">
 		select * from user where userId=#{userId}
 	</select>
+	<select id="getTemporaryUser" resultType="com.kindergarten.manage.po.User">
+		select * from user where departId=8
+	</select>
 	<select id="getLoginUser" parameterType="User" resultType="com.kindergarten.manage.po.User">
 		select * from user where userName=#{userName} 
 	</select>

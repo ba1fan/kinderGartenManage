@@ -198,3 +198,15 @@ CREATE  TABLE  `yearWage`
   `addTime` datetime NULL,
   PRIMARY KEY (`yearWageId`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE  TABLE  `temporary`
+(
+  `temporaryId` int(10) NOT NULL AUTO_INCREMENT,
+  `userId` int(10)  NULL,
+  `year` int(10)  NULL,
+  `month` int(10)  NULL,
+  `basic` float(10)  NULL,
+  `award` float(10)  NULL,
+  `addTime` datetime NULL,
+  PRIMARY KEY (`temporaryId`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;

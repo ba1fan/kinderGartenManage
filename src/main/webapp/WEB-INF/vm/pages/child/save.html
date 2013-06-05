@@ -10,6 +10,16 @@
 	$(function(){
 		$("#entrandayStr").ligerDateEditor({  labelWidth: 100, labelAlign: 'center' });
 		$("#birthdayStr").ligerDateEditor({ labelWidth: 100, labelAlign: 'center' });
+		var birthday=$("#birthday").val();
+		var entranday=$("#entranday").val();
+		if(birthday!=null&&birthday!="")
+		{
+			 $("#birthdayStr").ligerGetDateEditorManager().setValue(birthday);
+		}
+		if(entranday!=null&&entranday!="")
+		{
+			 $("#entrandayStr").ligerGetDateEditorManager().setValue(entranday);
+		}
 	});
 </script>
 
@@ -30,7 +40,8 @@
 			</tr>
 			<tr style="height: 40px">
 				<td class="tdTitle">
-					出生时间：<input type="text" id="birthdayStr" name="birthdayStr" value="$!child.birthdayStr" />
+					出生时间：<input type="text" id="birthdayStr" name="birthdayStr"  />
+					<input type="hidden" id="birthday"  value="$!child.birthdayStr" />
 				</td>
 				<td>
 					班级：
@@ -48,7 +59,8 @@
 			</tr>
 			<tr style="height: 40px">
 				<td class="tdTitle">
-					入学时间：<input type="text" id=entrandayStr name="entrandayStr" value="$!child.entrandayStr" />
+					入学时间：<input type="text" id="entrandayStr" name="entrandayStr"  />
+					<input type="hidden" id="entranday" value="$!child.entrandayStr" />
 				</td>
 				<td>
 					
@@ -97,10 +109,10 @@
 					父母是否为员工：
 				</td>
 				<td>
-					<input type="radio" name="isTeahcher" value="0"> 都不是  
-					<input type="radio" name="isTeahcher" value="1"> 父亲
-					<input type="radio" name="isTeahcher" value="2"> 母亲
-					<input type="radio" name="isTeahcher" value="3"> 都是
+					<input type="radio" #if($!child.isTeahcher==0) checked="checked" #end name="isTeahcher" value="0"> 都不是  
+					<input type="radio" #if($!child.isTeahcher==1) checked="checked" #end name="isTeahcher" value="1"> 父亲
+					<input type="radio" #if($!child.isTeahcher==2) checked="checked" #end name="isTeahcher" value="2"> 母亲
+					<input type="radio" #if($!child.isTeahcher==3) checked="checked" #end name="isTeahcher" value="3"> 都是
 				</td>
 			</tr>
 			<tr>
@@ -108,8 +120,8 @@
 					祖父母是否为员工：
 				</td>
 				<td>
-					<input type="radio" name="isGrandTeahcher" value="0"> 是  
-					<input type="radio" name="isGrandTeahcher" value="1"> 不是
+					<input type="radio" #if($!child.isGrandTeahcher==0) checked="checked" #end  name="isGrandTeahcher" value="0"> 是  
+					<input type="radio" #if($!child.isGrandTeahcher==1) checked="checked" #end  name="isGrandTeahcher" value="1"> 不是
 				</td>
 			</tr>
 		</table>

@@ -19,4 +19,6 @@ public interface IUserDAO {
 	void delete(int userId);
 
 	User getLoginUser(User args);
+
+	List<User> getTemporaryUser();
 }

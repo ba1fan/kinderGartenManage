@@ -11,6 +11,7 @@ import com.kindergarten.manage.dao.IMonthWageDAO;
 import com.kindergarten.manage.po.Attendance;
 import com.kindergarten.manage.po.Child;
 import com.kindergarten.manage.po.MonthWage;
+import com.kindergarten.manage.util.TimeMethod;
 import com.kindergarten.manage.util.WageConstants;
 
 @Service
@@ -84,6 +85,12 @@ public class MonthWageService {
 			} else {
 				monthWage.setCareWages(WageConstants.UNCARE_WAGE * getParam(args));
 			}
+		}
+		if (child.getIsTeahcher() == 1 && TimeMethod.getNowYear() % 2 == 1) {
+			monthWage.setManageWages(0l);
+		}
+		if (child.getIsTeahcher() == 2 && TimeMethod.getNowYear() % 2 == 0) {
+			monthWage.setManageWages(0l);
 		}
 	}
 

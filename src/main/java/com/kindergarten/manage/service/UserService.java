@@ -38,6 +38,10 @@ public class UserService {
 		return userDAO.getUsers(args);
 	}
 
+	public List<User> getTemporaryUser() {
+		return userDAO.getTemporaryUser();
+	}
+
 	/**
 	 * 根据搜索条件来获取用户的列表
 	 * 

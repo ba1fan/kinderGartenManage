@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kindergarten.manage.dao.ITemporaryDAO">
+	<select id="getTemporarys" parameterType="Temporary" resultType="com.kindergarten.manage.po.Temporary">
+		select t.*,u.userName from temporary t,user u where t.userId=u.userId
+	</select>
+	<select id="getTemporary" resultType="com.kindergarten.manage.po.Temporary">
+		select t.*,u.userName from temporary t,user u where t.userId=u.userId and temporaryId=#{temporaryId}
+	</select>
+	<insert id="insert" parameterType="com.kindergarten.manage.po.Temporary">
+		<selectKey keyProperty="temporaryId" resultType="java.lang.Integer" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into temporary 
+		(userId,year,month,basic,award,addTime) 
+		values
+		(#{userId},#{year},#{month},#{basic},#{award},now())
+	</insert>
+	<update id="update" parameterType="com.kindergarten.manage.po.Temporary">
+		update temporary 
+		set userId=#{userId}
+		,year=#{year}
+		,month=#{month}
+		,basic=#{basic}
+		,award=#{award}
+		where temporaryId=#{temporaryId}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from temporary where temporaryId=#{temporaryId}
+	</delete>
+</mapper>

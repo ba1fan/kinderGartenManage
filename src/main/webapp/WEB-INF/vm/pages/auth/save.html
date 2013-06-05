@@ -69,6 +69,7 @@
             data.push({ id: 17, pid: 5, text: '职称管理' });
             data.push({ id: 18, pid: 6, text: '用户管理' });
             data.push({ id: 19, pid: 6, text: '权限管理' });
+            data.push({ id: 20, pid: 4, text: '临时工收费' });
 
             $("#tree1").ligerTree({ 
             data:data,
@@ -87,7 +88,7 @@
     </script>
 <body style="padding:10px"> 
 	<form action="/auth/edit" method="post" onsubmit="return onSubmit();">
-	    <div style="width:400px; height:450px; margin:10px; float:left; border:1px solid #ccc; overflow:auto;  ">
+	    <div style="width:400px; height:480px; margin:10px; float:left; border:1px solid #ccc; overflow:auto;  ">
 	    	<ul id="tree1"></ul>
 	    	<input type="hidden" id="authMapId"  name="authMapId" value="$!authMap.authMapId" />
 	    	<input type="hidden" id="departId"  name="departId" value="$!departId"  />

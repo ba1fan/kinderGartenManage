@@ -9,6 +9,7 @@ import com.kindergarten.manage.dao.IChildDAO;
 import com.kindergarten.manage.dao.IYearWageDAO;
 import com.kindergarten.manage.po.Child;
 import com.kindergarten.manage.po.YearWage;
+import com.kindergarten.manage.util.TimeMethod;
 import com.kindergarten.manage.util.WageConstants;
 
 @Service
@@ -99,7 +100,12 @@ public class YearWageService {
 		} else {
 			yearWage.setBorrowWages(WageConstants.BORROW_WAGE_THIRD);
 		}
-
+		if (child.getIsTeahcher() == 1 && TimeMethod.getNowYear() % 2 == 1) {
+			yearWage.setManageWages(0l);
+		}
+		if (child.getIsTeahcher() == 2 && TimeMethod.getNowYear() % 2 == 0) {
+			yearWage.setManageWages(0l);
+		}
 	}
 
 	public void save(YearWage yearWage) {
